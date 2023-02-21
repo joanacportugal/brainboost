@@ -653,176 +653,42 @@ She shows them how to use the app and encourages them to work on the math lesson
 
 # App
 
-## Database Structure
+## User Types
 
-**SecurityQuestions**
-- id
-- question
+After the personas previously settled, it was easy to include 4 + 1 type of users for this app. Even though 3 of them can all see courses, it was important to set a particular feature for most of them.
 
-**Users**
-- id
-- full_name
-- username
-- email
-- password
-- profile_picture
-- user_type
-- securityquestion_id
-- security_answer
+- Learner: the main function of a Learner type is to interact with the app only for the common parts for regular users.
+- Instructor: even though the instructor can see other courses, the particular feature of this user is to create new courses.
+- Parent: even though the parent can see other courses, the unique feature of this user is to manage children courses progress.
+- Moderator: the moderator just controlls a part of Administrator user only to help him manage the app.
+- Administrator: an admin user has almost all the privileges for the CRUD operations inside the app.
 
-**UseCases**
-- id
-- name
+## Database Tables
 
-**Users_UseCases**
-- id_user
-- id_usecase
+After setting up all the project features and sorting by tables, the final app has a total of 22 tables:
 
-**Interests**
-- id
-- name
-
-**Users_Interests**
-- id_user
-- id_interest
-
-**Languages**
-- id
-- name
-
-**Categories**
-- id
-- name
-
-**Topics**
-- id
-- name
-- id_category
-
-**Courses**
-- id
-- title
-- description
-- content
-- level
-- duration
-- user_id
-- topic_id
-- language_id
-
-**CourseRatings**
-- id_course
-- id_user
-- rating
-
-**CourseComments**
-- id_course
-- id_user
-- comment
-
-**Lessons**
-- id
-- title
-- description
-- video_url
-- duration
-- has_additional_files
-- has_assignments
-- has_exercises
-- id_course
-
-**LessonFiles**
-- id
-- name
-- file_url
-- id_lesson
-
-**LessonAssignments**
-- id
-- title
-- description
-- template_url
-- id_lesson
-
-**ExerciseTypes**
-- id
-- name
-
-**Exercises**
-- id
-- title
-- example
-- question
-- options
-- answer
-- exercisetype_id
-- lesson_id
-
-**Users_Courses**
-- id_user
-- id_course
-- completed
-
-**Users_Progress**
-- id_user
-- id_lesson
-
-**Users_Assignments**
-- id_user
-- id_assignment
-- assignment_url
-
-**Users_Exercises**
-- id_user
-- id_exercise
-- answer
-- score
-
-**Achievements**
-- id
-- type
-- quantity
-- description
-- course_id
-
-**User_Achievements**
-- id_user
-- id_achievement
-- date
-
-**ForumTopics**
-- id
-- id_user
-- id_course
-- title
-- id_comment
-
-**ForumTopicReplies**
-- id_forumtopic
-- id_user
-- reply
-
-**DocumentSubmissions**
-- id
-- id_user
-- id_topic
-- document_url
-
-**DocumentSubmissionsRating**
-- id_documentsubmission
-- id_user
-- rating
-
-**DocumentSubmissionsComments**
-- id_documentsubmission
-- id_user
-- comment
-
-**Notifications**
-- id
-- title
-- description
-- id_user
+- Categories
+- Courses
+- DiscussionBoardReplies
+- DiscussionBoards
+- DocumentSubmissionFeedbacks
+- DocumentSubmissions
+- Exercises
+- ExerciseTypes
+- Languages
+- LessonAssignments
+- LessonFiles
+- Lessons
+- Logs
+- Notifications
+- SecurityQuestions
+- Topics
+- UserPermissions
+- Users
+- Users_Assignments
+- Users_Exercises
+- Users_Progress
+- User_Courses
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
