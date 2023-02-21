@@ -24,6 +24,20 @@
         <li><a href="#sitemap">Sitemap</a></li>
         <li><a href="#user-personas">User Personas</a></li>
         <li><a href="#user-scenarios">User Scenarios</a></li>
+        <li><a href="#empathy-maps">Empathy Maps</a></li>
+        <li><a href="#color-palette">Color Palette</a></li>
+        <li><a href="#typography">Typography</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#app">App</a>
+      <ul>
+        <li><a href="#database-structure">Database Structure</a></li>
+        <li><a href="#api-documentation">API Documentation</a></li>
+        <li><a href="#api-testing">API Testing</a></li>
+        <li><a href="#web-pages">Web Pages</a></li>
+        <li><a href="#web-testing">Web Testing</a></li>
+        <li><a href="#mobile-screens">Mobile Screens</a></li>
       </ul>
     </li>
   </ol>
@@ -430,5 +444,237 @@ Sarah decides to use BrainBoost in her classroom and finds that her students are
 Maria's children are struggling with Math and she wants to find a way to help them improve their skills without adding more to her already busy schedule. She downloads an e-learning app that offers interactive math lessons for kids and sets up profiles for each of her children.
 
 She shows them how to use the app and encourages them to work on the math lessons during their free time. Over the next few weeks, she sees a noticeable improvement in their math skills and feels proud of herself for finding a solution that works for her family's needs. She continues to use the app to support her children's education and recommends it to other parents in her community.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Empathy Maps
+
+### The High School Student
+
+**Say:**
+- "I want to learn new things outside of school."
+- "I want to connect with other people who are interested in the same subjects."
+- "I don't want to fall behind my classmates."
+
+**Think:**
+- "I'm not sure which courses to take."
+- "I hope the course material is engaging and interesting."
+- "I want to make sure the course will help me with my future career goals."
+
+**Do:**
+- Searches for online courses related to their interests and academic goals.
+- Reads reviews and ratings of courses to make an informed decision.
+- Watches lectures, reads materials, and completes assignments.
+- Engages with other students through discussion boards and other interactive features.
+
+**Feel:**
+- Excited to learn new things and expand their knowledge.
+- Anxious about the workload and the difficulty of the course.
+- Hopeful that the course will help them in their future career or academic pursuits.
+
+### The College Student
+
+**Say:**
+- "I'm struggling to keep up with my coursework and need additional resources to help me study."
+- "I want to learn more about specific topics or subjects that are not covered in my courses."
+- "I'm looking for a platform that is easy to use and navigate."
+
+**Think:**
+- "I want to get good grades and do well in my classes."
+- "I need to learn this material in order to succeed in my future career."
+- "I want to learn from an experienced instructor who can provide valuable insights and feedback."
+
+**Do:**
+- Searches for online courses related to their subject area of interest.
+- Participates in online discussions with other students and the instructor.
+- Take quizzes and assessments to test their knowledge
+
+**Feel:**
+- Excited about the opportunity to learn and expand their knowledge.
+- Grateful for the opportunity to learn from an experienced instructor and connect with other students who share their interests.
+- Frustrated with difficult coursework
+
+### The Professional
+
+**Say:**
+- "I don't have a lot of free time, so I need courses that are efficient."
+- "I need courses that are relevant to my industry and career goals."
+- "I want to be able to apply what I learn to my job right away."
+
+**Think:**
+- "I need to stay up-to-date with the latest trends and technologies in my industry."
+- "I want to be more competitive in the job market."
+- "I want to take my career to the next level."
+
+**Do:**
+- Attend courses to network and learn about the latest industry trends.
+- Take courses to improve their skills and advance their careers.
+- Apply what they learn to their jobs and seek out opportunities to demonstrate their expertise.
+
+**Feel:**
+- Anxious about falling behind in their industry.
+- Motivated to stay competitive and advance their career.
+- Frustrated by a lack of time to pursue additional learning opportunities.
+- Confident in their ability to apply what they learn to their jobs.
+
+### The Busy Professional
+
+**Say:**
+- "I need to find a way to learn new skills while still maintaining my busy work schedule."
+- "I want to find an e-learning platform that is easy to use and fits into my lifestyle."
+- "I don't have time to attend in-person classes, so I need an online solution that is flexible and accessible."
+
+**Think:**
+- "I want to learn new skills to advance in my career or switch to a new field."
+- "I don't want to waste my time on irrelevant or low-quality courses."
+- "I need an e-learning platform that will help me achieve my goals and provide me with valuable knowledge and skills."
+
+**Do:**
+- Research different e-learning platforms and read reviews to find the best option.
+- Prioritize courses and learning modules that align with career goals and interests.
+- Set aside dedicated time for learning and stick to a schedule.
+
+**Feel:**
+- Frustrated by the lack of time and resources to pursue additional education.
+- Motivated to learn and grow professionally.
+- Skeptical about the effectiveness and quality of online learning platforms.
+
+### The Hobbyist
+
+**Say:**
+- "I love learning new things related to my hobbies and interests!"
+- "I wish I had more time to dedicate to learning and practicing my hobby."
+- "I like to share my knowledge and skills with others who have similar interests."
+
+**Think:**
+- "I want to learn new skills to improve my craft and expand my knowledge."
+- "I want to feel a sense of accomplishment when I learn something new or complete a project."
+- "I want to find courses or resources that are specifically tailored to my hobby and skill level."
+
+**Do:**
+- Research online for courses, tutorials, and resources related to their hobby.
+- Practice and experiment with new techniques and skills they learn.
+- Share their work and knowledge with others through social media, online forums or in-person meetups.
+
+**Feel:**
+- Excited and curious when discovering new techniques and skills.
+- Frustrated when they encounter challenges or obstacles in their learning.
+- Satisfied and proud when they complete a project or master a new skill.
+
+### The Retiree
+
+**Say:**
+- “I want to keep my mind active and learn new things.”
+- “I have more free time now, so I want to use it productively.”
+- “I don't want to feel isolated or disconnected from the world.”
+
+**Think:**
+- “Learning new things will help me stay sharp and engaged with the world.”
+- “I want to find courses that are interesting and relevant to me.”
+- “I'm worried that I might not be able to keep up with the technology and tools needed for online learning.”
+
+**Do:**
+- Research courses and learning platforms online.
+- Sign up for courses that are interesting and relevant to their goals.
+- Dedicate time each day or week to learning.
+
+**Feel:**
+- Excited to learn new things and expand their knowledge.
+- Proud of their accomplishments and achievements.
+- A sense of community and connection with other learners.
+- Some anxiety or fear about keeping up with technology and online learning.
+
+### The Educator
+
+**Say:**
+- "I need an e-learning platform that's easy to use and navigate, with a clear and intuitive interface."
+- "I want to be able to create and share my own courses and materials with my students."
+- "I'm always looking for new ways to engage my students and keep them interested in learning."
+
+**Think:**
+- "I want to ensure that my students are engaged and motivated to learn."
+- "I need to provide my students with the knowledge and skills they need to succeed in their academic and professional lives."
+- "I want to stay up-to-date on the latest teaching methods and technologies to improve my own teaching skills."
+
+**Do:**
+- Create and share course materials with students
+- Monitor student progress and performance
+- Engage in ongoing professional development and training
+
+**Feel:**
+- Frustration with outdated or difficult-to-use e-learning platforms
+- Motivation to provide the best possible education for students
+- Passion for teaching and helping students learn and succeed
+
+### The Parent
+
+**Say:**
+- "I want my child to succeed in their studies and have a good education."
+- "I'm always looking for new ways to support my child's learning."
+- "I'm worried my child will fall behind in school if they don't have access to additional learning materials."
+
+**Think:**
+- "I need to find resources that are both educational and engaging for my child."
+- "I want to make sure I'm doing everything I can to help my child succeed."
+- "I want to track my child's progress and see how they're doing in their courses."
+
+**Do:**
+- Encourages their child to use the app and complete courses on a regular basis.
+- Create a schedule or routine for studying at home.
+- Monitor my child's progress and provide feedback and support.
+
+**Feel:**
+- Frustrated by the high cost of private tutors and after-school programs.
+- Concerned about my child's education and future.
+- Hopeful that the e-learning app will provide their child with the resources they need to succeed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Color Palette
+
+<br>
+
+![#463BCE](https://placehold.co/30x30/463BCE/463BCE.png) `#463BCE`
+![#665BE6](https://placehold.co/30x30/665BE6/665BE6.png) `#665BE6`
+![#157D6F](https://placehold.co/30x30/157D6F/157D6F.png) `#157D6F`
+![#202244](https://placehold.co/30x30/202244/202244.png) `#202244`
+![#F1F1F1](https://placehold.co/30x30/F1F1F1/F1F1F1.png) `#F1F1F1`
+![#212121](https://placehold.co/30x30/212121/212121.png) `#212121`
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Typography
+
+- Work Sans Light
+- Work Sans Regular
+- Work Sans SemiBold
+- Work Sans Bold
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+# App
+
+## Database Structure
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## API Documentation
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## API Testing
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Web Pages
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Web Testing
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Mobile Screens
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
