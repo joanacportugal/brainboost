@@ -3,9 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  <img src="./assets/logo.png" alt="Logo" width="80" height="80">
   <h1 align="center">BrainBoost: An E-Learning App</h1>
 </div>
 
@@ -656,6 +654,175 @@ She shows them how to use the app and encourages them to work on the math lesson
 # App
 
 ## Database Structure
+
+**SecurityQuestions**
+- id
+- question
+
+**Users**
+- id
+- full_name
+- username
+- email
+- password
+- profile_picture
+- user_type
+- securityquestion_id
+- security_answer
+
+**UseCases**
+- id
+- name
+
+**Users_UseCases**
+- id_user
+- id_usecase
+
+**Interests**
+- id
+- name
+
+**Users_Interests**
+- id_user
+- id_interest
+
+**Languages**
+- id
+- name
+
+**Categories**
+- id
+- name
+
+**Topics**
+- id
+- name
+- id_category
+
+**Courses**
+- id
+- title
+- description
+- content
+- level
+- duration
+- user_id
+- topic_id
+- language_id
+
+**CourseRatings**
+- id_course
+- id_user
+- rating
+
+**CourseComments**
+- id_course
+- id_user
+- comment
+
+**Lessons**
+- id
+- title
+- description
+- video_url
+- duration
+- has_additional_files
+- has_assignments
+- has_exercises
+- id_course
+
+**LessonFiles**
+- id
+- name
+- file_url
+- id_lesson
+
+**LessonAssignments**
+- id
+- title
+- description
+- template_url
+- id_lesson
+
+**ExerciseTypes**
+- id
+- name
+
+**Exercises**
+- id
+- title
+- example
+- question
+- options
+- answer
+- exercisetype_id
+- lesson_id
+
+**Users_Courses**
+- id_user
+- id_course
+- completed
+
+**Users_Progress**
+- id_user
+- id_lesson
+
+**Users_Assignments**
+- id_user
+- id_assignment
+- assignment_url
+
+**Users_Exercises**
+- id_user
+- id_exercise
+- answer
+- score
+
+**Achievements**
+- id
+- type
+- quantity
+- description
+- course_id
+
+**User_Achievements**
+- id_user
+- id_achievement
+- date
+
+**ForumTopics**
+- id
+- id_user
+- id_course
+- title
+- id_comment
+
+**ForumTopicReplies**
+- id_forumtopic
+- id_user
+- reply
+
+**DocumentSubmissions**
+- id
+- id_user
+- id_topic
+- document_url
+
+**DocumentSubmissionsRating**
+- id_documentsubmission
+- id_user
+- rating
+
+**DocumentSubmissionsComments**
+- id_documentsubmission
+- id_user
+- comment
+
+**Notifications**
+- id
+- title
+- description
+- id_user
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -1,0 +1,22 @@
+{
+  "openapi": "3.0.1",
+  "info": {},
+  "produces": ["application/json"],
+  "schemes": ["http"],
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "examples": {},
+    "parameters": {},
+    "responses": {},
+    "requestBodies": {}
+  },
+  "tags": [],
+  "paths": {}
+}
