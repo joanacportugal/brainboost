@@ -11,6 +11,7 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 		acquire: config.pool.acquire,
 		idle: config.pool.idle,
 	},
+	logging: false
 });
 
 // OPTIONAL: test the connection
@@ -33,17 +34,19 @@ db.Languages = Tables.Languages(sequelize, DataTypes);
 db.Categories = Tables.Categories(sequelize, DataTypes);
 db.Topics = Tables.Topics(sequelize, DataTypes);
 db.Courses = Tables.Courses(sequelize, DataTypes);
-db.User_Courses = Tables.User_Courses(sequelize, DataTypes);
+db.Users_Courses = Tables.Users_Courses(sequelize, DataTypes);
 db.Lessons = Tables.Lessons(sequelize, DataTypes);
 db.LessonFiles = Tables.LessonFiles(sequelize, DataTypes);
 db.LessonAssignments = Tables.LessonAssignments(sequelize, DataTypes);
 db.ExerciseTypes = Tables.ExerciseTypes(sequelize, DataTypes);
-db.Exercises = Tables.Exercises(sequelize, DataTypes);
+db.LessonExercises = Tables.LessonExercises(sequelize, DataTypes);
+db.Users_Progresses = Tables.Users_Progresses(sequelize, DataTypes);
 db.Users_Assignments = Tables.Users_Assignments(sequelize, DataTypes);
+db.Users_Exercises = Tables.Users_Exercises(sequelize, DataTypes);
 db.DiscussionBoards = Tables.DiscussionBoards(sequelize, DataTypes);
 db.DiscussionBoardReplies = Tables.DiscussionBoardReplies(sequelize, DataTypes);
 db.DocumentSubmissions = Tables.DocumentSubmissions(sequelize, DataTypes);
-db.DocumentSubmissionFeedback = Tables.DocumentSubmissionFeedback(sequelize, DataTypes);
+db.DocumentSubmissionFeedbacks = Tables.DocumentSubmissionFeedbacks(sequelize, DataTypes);
 db.Notifications = Tables.Notifications(sequelize, DataTypes);
 
 // 1:1 relationships
@@ -52,11 +55,11 @@ db.UserPermissions.belongsTo(db.Users);
 
 
 // 1:N relationships
-db.SecurityQuestions.hasMany(db.Users);
+db.SecurityQuestions.hasMany(db.Users, { foreignKey: { name: "SecurityQuestionId" } });
 db.Users.belongsTo(db.SecurityQuestions);
 
-db.Users.hasMany(db.Users, { foreignKey: { name: "ParentId", allowNull: true } });
-db.Users.belongsTo(db.Users);
+db.Users.hasMany(db.Users, { foreignKey: { name: "ParentId" } });
+db.Users.belongsTo(db.Users, { foreignKey: { name: "ParentId" } });
 
 db.Users.hasMany(db.UserLogs);
 db.UserLogs.belongsTo(db.Users);
@@ -82,11 +85,11 @@ db.LessonFiles.belongsTo(db.Lessons);
 db.Lessons.hasMany(db.LessonAssignments);
 db.LessonAssignments.belongsTo(db.Lessons);
 
-db.Lessons.hasMany(db.Exercises);
-db.Exercises.belongsTo(db.Lessons);
+db.Lessons.hasMany(db.LessonExercises);
+db.LessonExercises.belongsTo(db.Lessons);
 
-db.ExerciseTypes.hasMany(db.Exercises);
-db.Exercises.belongsTo(db.ExerciseTypes);
+db.ExerciseTypes.hasMany(db.LessonExercises);
+db.LessonExercises.belongsTo(db.ExerciseTypes);
 
 db.Users.hasMany(db.DiscussionBoards);
 db.DiscussionBoards.belongsTo(db.Users);
@@ -104,23 +107,23 @@ db.Users.hasMany(db.Notifications);
 db.Notifications.belongsTo(db.Users);
 
 // N:N relationships
-db.Users.belongsToMany(db.Courses, { through: "User_Courses" });
-db.Courses.belongsToMany(db.Users, { through: "User_Courses" });
+db.Users.belongsToMany(db.Courses, { through: "Users_Courses" });
+db.Courses.belongsToMany(db.Users, { through: "Users_Courses" });
 
-db.Users.belongsToMany(db.Lessons, { through: "Users_Progress" });
-db.Lessons.belongsToMany(db.Users, { through: "Users_Progress" });
+db.Users.belongsToMany(db.Lessons, { through: "Users_Progresses", timestamps: false });
+db.Lessons.belongsToMany(db.Users, { through: "Users_Progresses", timestamps: false });
 
 db.Users.belongsToMany(db.LessonAssignments, { through: "Users_Assignments" });
 db.LessonAssignments.belongsToMany(db.Users, { through: "Users_Assignments" });
 
-db.Users.belongsToMany(db.Exercises, { through: "Users_Exercises" });
-db.Exercises.belongsToMany(db.Users, { through: "Users_Exercises" });
+db.Users.belongsToMany(db.LessonExercises, { through: "Users_Exercises" });
+db.LessonExercises.belongsToMany(db.Users, { through: "Users_Exercises" });
 
 db.Users.belongsToMany(db.Topics, { through: "DocumentSubmissions" });
 db.Topics.belongsToMany(db.Users, { through: "DocumentSubmissions" });
 
-db.Users.belongsToMany(db.DocumentSubmissions, { through: "DocumentSubmissionFeedback" });
-db.DocumentSubmissions.belongsToMany(db.Users, { through: "DocumentSubmissionFeedback" });
+db.Users.belongsToMany(db.DocumentSubmissions, { through: "DocumentSubmissionFeedbacks", timestamps: false });
+db.DocumentSubmissions.belongsToMany(db.Users, { through: "DocumentSubmissionFeedbacks", timestamps: false });
 
 (async () => {
 	try {

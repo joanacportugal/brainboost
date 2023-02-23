@@ -1,8 +1,6 @@
 const express = require("express");
 let router = express.Router();
 
-let models = require("../models")
-
 // middleware for all routes
 router.use((req, res, next) => {
 	const start = Date.now();
@@ -16,11 +14,9 @@ router.use((req, res, next) => {
 	next();
 });
 
+router.use("/security", require("./SecurityQuestions"));
+
 //send a predefined error message for invalid routes
-router.all("*", function (req, res) {
-	res.status(404).json({
-		message: "API: what???",
-	});
-});
+router.all("*", (req, res) => res.status(404).json({ error: "API: what???" }));
 
 module.exports = router;

@@ -87,6 +87,15 @@ The e-learning app aims to provide users with an interactive platform for learni
 # How To Install And Run
 
 **Backend**
+- Create env file
+- Insert into database default values from assets/db.sql
+- Run the following commands on terminal:
+
+```npm
+cd server
+npm install
+npm run dev | npm run start
+```
 
 **Frontend**
 

@@ -17,6 +17,6 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: t
 app.use("/api", require("./routes"));
 
 // handle invalid routes
-app.get("*", (req, res) => res.status(404).json({ message: "WHAT???" }));
+app.get("*", (req, res) => res.status(404).json({ error: "WHAT???" }));
 
 app.listen(port, host, () => console.log(`App listening at http://${host}:${port}/`));

@@ -114,11 +114,7 @@ const Users = (sequelize, DataTypes) => {
 				}
 			}
 		},
-		last_login: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
-		user_type: {
+		userType: {
 			type: DataTypes.ENUM("Learner", "Instructor", "Parent", "Moderator", "Administrator"),
 			allowNull: false,
 			defaultValue: "Learner",
@@ -128,26 +124,22 @@ const Users = (sequelize, DataTypes) => {
 				},
 				isIn: {
 					args: [
-						["regular", "mod", "admin"]
+						["Learner", "Instructor", "Parent", "Moderator", "Administrator"]
 					],
 					msg: "Invalid user type! Valid user types: Learner, Instructor, Parent, Moderator, Administrator."
 				}
 			}
 		},
-		blocked: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false
-		},
-		security_answer: {
+		securityAnswer: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			notEmpty: true,
 			validate: {
 				notNull: {
-					msg: "Password cannot be null!"
+					msg: "Answer cannot be null!"
 				},
 				notEmpty: {
-					msg: "Password cannot be empty!"
+					msg: "Answer cannot be empty!"
 				}
 			}
 		}
@@ -362,6 +354,22 @@ const UserPermissions = (sequelize, DataTypes) => {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false
 		},
+		DocumentSubmission_create: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
+		},
+		DocumentSubmission_read: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: true
+		},
+		DocumentSubmission_update: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
+		},
+		DocumentSubmission_delete: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
+		},
 		DocumentSubmissionFeedback_create: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false
@@ -377,7 +385,7 @@ const UserPermissions = (sequelize, DataTypes) => {
 		DocumentSubmissionFeedback_delete: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false
-		},
+		}
 	}, {
 		timestamps: false
 	});
@@ -448,20 +456,20 @@ const Languages = (sequelize, DataTypes) => {
 
 const Categories = (sequelize, DataTypes) => {
 	return sequelize.define("Categories", {
-		name: {
+		category: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			notEmpty: true,
 			unique: {
 				args: true,
-				msg: "Category name already exists!"
+				msg: "Category already exists!"
 			},
 			validate: {
 				notNull: {
-					msg: "Category name cannot be null!"
+					msg: "Category cannot be null!"
 				},
 				notEmpty: {
-					msg: "Category name cannot be empty!"
+					msg: "Category cannot be empty!"
 				}
 			}
 		}
@@ -472,20 +480,20 @@ const Categories = (sequelize, DataTypes) => {
 
 const Topics = (sequelize, DataTypes) => {
 	return sequelize.define("Topics", {
-		name: {
+		topic: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			notEmpty: true,
 			unique: {
 				args: true,
-				msg: "Topic name already exists!"
+				msg: "Topic already exists!"
 			},
 			validate: {
 				notNull: {
-					msg: "Topic name cannot be null!"
+					msg: "Topic cannot be null!"
 				},
 				notEmpty: {
-					msg: "Topic name cannot be empty!"
+					msg: "Topic cannot be empty!"
 				}
 			}
 		}
@@ -496,16 +504,16 @@ const Topics = (sequelize, DataTypes) => {
 
 const Courses = (sequelize, DataTypes) => {
 	return sequelize.define("Courses", {
-		title: {
+		course: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			notEmpty: true,
 			validate: {
 				notNull: {
-					msg: "Course title cannot be null!"
+					msg: "Course cannot be null!"
 				},
 				notEmpty: {
-					msg: "Course title cannot be empty!"
+					msg: "Course cannot be empty!"
 				}
 			}
 		},
@@ -556,15 +564,21 @@ const Courses = (sequelize, DataTypes) => {
 		},
 		completed: {
 			type: DataTypes.BOOLEAN,
-			defaultValue: false
+			allowNull: false,
+			defaultValue: false,
+			validate: {
+				notNull: {
+					msg: "Completed cannot be null!"
+				}
+			}
 		},
 	}, {
 		timestamps: false
 	});
 };
 
-const User_Courses = (sequelize, DataTypes) => {
-	return sequelize.define("User_Courses", {
+const Users_Courses = (sequelize, DataTypes) => {
+	return sequelize.define("Users_Courses", {
 		completed: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false
@@ -603,16 +617,16 @@ const User_Courses = (sequelize, DataTypes) => {
 
 const Lessons = (sequelize, DataTypes) => {
 	return sequelize.define("Lessons", {
-		title: {
+		lesson: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			notEmpty: true,
 			validate: {
 				notNull: {
-					msg: "Lesson title cannot be null!"
+					msg: "Lesson cannot be null!"
 				},
 				notEmpty: {
-					msg: "Lesson title cannot be empty!"
+					msg: "Lesson cannot be empty!"
 				}
 			}
 		},
@@ -629,7 +643,7 @@ const Lessons = (sequelize, DataTypes) => {
 				}
 			}
 		},
-		video_url: {
+		videoUrl: {
 			type: DataTypes.TEXT,
 			allowNull: false,
 			notEmpty: true,
@@ -665,7 +679,7 @@ const Lessons = (sequelize, DataTypes) => {
 				}
 			}
 		},
-		hasAdditionalFiles: {
+		hasFiles: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false
 		},
@@ -697,7 +711,7 @@ const LessonFiles = (sequelize, DataTypes) => {
 				}
 			}
 		},
-		file_url: {
+		fileUrl: {
 			type: DataTypes.TEXT,
 			allowNull: false,
 			notEmpty: true,
@@ -753,20 +767,20 @@ const LessonAssignments = (sequelize, DataTypes) => {
 
 const ExerciseTypes = (sequelize, DataTypes) => {
 	return sequelize.define("ExerciseTypes", {
-		name: {
+		type: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			notEmpty: true,
 			unique: {
 				args: true,
-				msg: "Exercise type already exists!"
+				msg: "Type already exists!"
 			},
 			validate: {
 				notNull: {
-					msg: "Exercise type cannot be null!"
+					msg: "Type cannot be null!"
 				},
 				notEmpty: {
-					msg: "Exercise type cannot be empty!"
+					msg: "Type cannot be empty!"
 				}
 			}
 		}
@@ -775,8 +789,8 @@ const ExerciseTypes = (sequelize, DataTypes) => {
 	});
 };
 
-const Exercises = (sequelize, DataTypes) => {
-	return sequelize.define("Exercises", {
+const LessonExercises = (sequelize, DataTypes) => {
+	return sequelize.define("LessonExercises", {
 		title: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -834,9 +848,16 @@ const Exercises = (sequelize, DataTypes) => {
 	});
 };
 
+const Users_Progresses = (sequelize, DataTypes) => {
+	return sequelize.define("Users_Progresses", {
+	}, {
+		timestamps: false
+	});
+};
+
 const Users_Assignments = (sequelize, DataTypes) => {
 	return sequelize.define("Users_Assignments", {
-		file_url: {
+		fileUrl: {
 			type: DataTypes.TEXT,
 			allowNull: false,
 			notEmpty: true,
@@ -932,7 +953,7 @@ const DiscussionBoardReplies = (sequelize, DataTypes) => {
 
 const DocumentSubmissions = (sequelize, DataTypes) => {
 	return sequelize.define("DocumentSubmissions", {
-		document_url: {
+		documentUrl: {
 			type: DataTypes.TEXT,
 			allowNull: false,
 			notEmpty: true,
@@ -953,8 +974,8 @@ const DocumentSubmissions = (sequelize, DataTypes) => {
 	});
 };
 
-const DocumentSubmissionFeedback = (sequelize, DataTypes) => {
-	return sequelize.define("DocumentSubmissionFeedback", {
+const DocumentSubmissionFeedbacks = (sequelize, DataTypes) => {
+	return sequelize.define("DocumentSubmissionFeedbacks", {
 		rating: {
 			type: DataTypes.INTEGER,
 			notEmpty: true,
@@ -1029,17 +1050,18 @@ module.exports = {
 	Categories,
 	Topics,
 	Courses,
-	User_Courses,
+	Users_Courses,
 	Lessons,
 	LessonFiles,
 	LessonAssignments,
 	ExerciseTypes,
-	Exercises,
+	LessonExercises,
+	Users_Progresses,
 	Users_Assignments,
 	Users_Exercises,
 	DiscussionBoards,
 	DiscussionBoardReplies,
 	DocumentSubmissions,
-	DocumentSubmissionFeedback,
+	DocumentSubmissionFeedbacks,
 	Notifications
 };

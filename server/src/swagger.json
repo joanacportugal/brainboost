@@ -1,10 +1,91 @@
 {
   "openapi": "3.0.1",
-  "info": {},
-  "produces": ["application/json"],
-  "schemes": ["http"],
+  "info": {
+    "title": "BrainBoost API",
+    "description": "BrainBoost is an e-learning app where users can learn through video tutorials and exercises, but also communicate with each other by forum topics and evaluate others' work.",
+    "version": "1.0"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "Categories",
+      "description": "Categories routes"
+    },
+    {
+      "name": "Courses",
+      "description": "Courses routes"
+    },
+    {
+      "name": "Discussion Boards",
+      "description": "Discussion Boards routes"
+    },
+    {
+      "name": "Document Submissions",
+      "description": "Document Submissions routes"
+    },
+    {
+      "name": "Exercises Types",
+      "description": "Exercises Types routes"
+    },
+    {
+      "name": "Languages",
+      "description": "Languages routes"
+    },
+    {
+      "name": "Lessons",
+      "description": "Lessons routes"
+    },
+    {
+      "name": "Logs",
+      "description": "Logs routes"
+    },
+    {
+      "name": "Notifications",
+      "description": "Notifications routes"
+    },
+    {
+      "name": "Security Questions",
+      "description": "Security Questions routes"
+    },
+    {
+      "name": "User Permissions",
+      "description": "User Permissions routes"
+    },
+    {
+      "name": "Users",
+      "description": "Users routes"
+    },
+    {
+      "name": "Public",
+      "description": "Public routes"
+    },
+    {
+      "name": "Private - Common",
+      "description": "Private Common routes"
+    },
+    {
+      "name": "Private - Learner",
+      "description": "Private Learner routes"
+    },
+    {
+      "name": "Private - Instructor",
+      "description": "Private Instructor routes"
+    },
+    {
+      "name": "Private - Parent",
+      "description": "Private Instructor routes"
+    },
+    {
+      "name": "Private - Administrator / Moderator",
+      "description": "Private Administrator / Moderator routes"
+    }
+  ],
   "components": {
-    "schemas": {},
     "securitySchemes": {
       "bearer": {
         "type": "http",
@@ -12,11 +93,834 @@
         "bearerFormat": "JWT"
       }
     },
+    "schemas": {
+      "Categories": {
+        "type": "object",
+        "required": [
+          "category"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "category": {
+            "type": "string"
+          }
+        }
+      },
+      "Courses": {
+        "type": "object",
+        "required": [
+          "course",
+          "description",
+          "content",
+          "level",
+          "UserId",
+          "TopicId",
+          "LanguageId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "course": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "Beginner",
+              "Intermediate",
+              "Advanced",
+              "Expert"
+            ]
+          },
+          "completed": {
+            "type": "boolean",
+            "default": false
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          },
+          "TopicId": {
+            "type": "string",
+            "$ref": "#/components/schemas/Topics"
+          },
+          "LanguageId": {
+            "type": "string",
+            "$ref": "#/components/schemas/Languages"
+          }
+        }
+      },
+      "DiscussionBoardReplies": {
+        "type": "object",
+        "required": [
+          "DiscussionBoardId",
+          "UserId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "text": {
+            "type": "string"
+          },
+          "DiscussionBoardId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/DiscussionBoards"
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          }
+        }
+      },
+      "DiscussionBoards": {
+        "type": "object",
+        "required": [
+          "title",
+          "question",
+          "UserId",
+          "CourseId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          },
+          "CourseId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Courses"
+          }
+        }
+      },
+      "DocumentSubmissionFeedbacks": {
+        "type": "object",
+        "required": [
+          "UserId",
+          "DocumentSubmissionUserId"
+        ],
+        "properties": {
+          "rating": {
+            "type": "integer",
+            "min": 1,
+            "max": 5
+          },
+          "comment": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          },
+          "DocumentSubmissionUserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/DocumentSubmissions"
+          }
+        }
+      },
+      "DocumentSubmissions": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "documentUrl": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          },
+          "TopicId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Topics"
+          }
+        }
+      },
+      "ExerciseTypes": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "Languages": {
+        "type": "object",
+        "required": [
+          "language"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "language": {
+            "type": "string"
+          }
+        }
+      },
+      "LessonAssignments": {
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "LessonId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "LessonId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Lessons"
+          }
+        }
+      },
+      "LessonExercises": {
+        "type": "object",
+        "required": [
+          "title",
+          "question",
+          "options",
+          "answer",
+          "LessonId",
+          "ExerciseTypeId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          },
+          "options": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          },
+          "LessonId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Lessons"
+          },
+          "ExerciseTypeId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/ExerciseTypes"
+          }
+        }
+      },
+      "LessonFiles": {
+        "type": "object",
+        "required": [
+          "name",
+          "fileUrl",
+          "LessonId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "fileUrl": {
+            "type": "string"
+          },
+          "LessonId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Lessons"
+          }
+        }
+      },
+      "Lessons": {
+        "type": "object",
+        "required": [
+          "lesson",
+          "description",
+          "videoUrl",
+          "duration",
+          "CourseId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "lesson": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "videoUrl": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "hasFiles": {
+            "type": "boolean",
+            "default": false
+          },
+          "hasAssignments": {
+            "type": "boolean",
+            "default": false
+          },
+          "hasExercises": {
+            "type": "boolean",
+            "default": false
+          },
+          "CourseId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Courses"
+          }
+        }
+      },
+      "Logs": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "CREATE",
+              "UPDATE",
+              "DELETE"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          }
+        }
+      },
+      "Notifications": {
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "UserId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          }
+        }
+      },
+      "SecurityQuestions": {
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "question": {
+            "type": "string"
+          }
+        }
+      },
+      "Topics": {
+        "type": "object",
+        "required": [
+          "topic",
+          "CategoryId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "CategoryId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Categories"
+          }
+        }
+      },
+      "UserPermissions": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "SecurityQuestions_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "SecurityQuestions_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "SecurityQuestions_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "SecurityQuestions_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "Users_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "Users_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "Users_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "Users_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "UserPermissions_read": {
+            "type": "boolean",
+            "default": false
+          },
+          "UserPermissions_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "UserLogs_read": {
+            "type": "boolean",
+            "default": false
+          },
+          "Languages_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "Languages_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "Languages_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "Languages_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "Categories_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "Categories_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "Categories_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "Categories_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "Topics_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "Topics_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "Topics_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "Topics_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "Courses_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "Courses_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "Courses_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "Courses_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "CourseFeedback_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "CourseFeedback_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "CourseFeedback_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "CourseFeedback_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "Lessons_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "Lessons_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "Lessons_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "Lessons_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "ExerciseTypes_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "ExerciseTypes_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "ExerciseTypes_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "ExerciseTypes_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "Achievements_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "Achievements_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "Achievements_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "Achievements_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "ForumTopics_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "ForumTopics_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "ForumTopics_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "ForumTopics_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "ForumTopicReplies_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "ForumTopicReplies_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "ForumTopicReplies_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "ForumTopicReplies_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "DocumentSubmission_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "DocumentSubmission_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "DocumentSubmission_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "DocumentSubmission_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "DocumentSubmissionFeedback_create": {
+            "type": "boolean",
+            "default": false
+          },
+          "DocumentSubmissionFeedback_read": {
+            "type": "boolean",
+            "default": true
+          },
+          "DocumentSubmissionFeedback_update": {
+            "type": "boolean",
+            "default": false
+          },
+          "DocumentSubmissionFeedback_delete": {
+            "type": "boolean",
+            "default": false
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          }
+        }
+      },
+      "Users": {
+        "type": "object",
+        "required": [
+          "name",
+          "surname",
+          "username",
+          "email",
+          "password",
+          "userType",
+          "securityAnswer",
+          "SecurityQuestionId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string",
+            "default": "https://1fid.com/wp-content/uploads/2022/06/no-profile-picture-6-1024x1024.jpg"
+          },
+          "userType": {
+            "type": "string",
+            "enum": [
+              "Learner",
+              "Instructor",
+              "Parent",
+              "Moderator",
+              "Administrator"
+            ]
+          },
+          "securityAnswer": {
+            "type": "string"
+          },
+          "SecurityQuestionId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/SecurityQuestions"
+          },
+          "ParentId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          }
+        }
+      },
+      "Users_Assignments": {
+        "type": "object",
+        "required": [
+          "fileUrl",
+          "UserId",
+          "LessonAssignmentId"
+        ],
+        "properties": {
+          "fileUrl": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          },
+          "LessonAssignmentId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/LessonAssignments"
+          }
+        }
+      },
+      "Users_Courses": {
+        "type": "object",
+        "required": [
+          "UserId",
+          "CourseId"
+        ],
+        "properties": {
+          "completed": {
+            "type": "boolean",
+            "default": false
+          },
+          "rating": {
+            "type": "integer",
+            "min": 1,
+            "max": 5
+          },
+          "comment": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          },
+          "CourseId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Courses"
+          }
+        }
+      },
+      "Users_Exercises": {
+        "type": "object",
+        "required": [
+          "answer",
+          "UserId",
+          "LessonExerciseId"
+        ],
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          },
+          "LessonExerciseId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/LessonExercises"
+          }
+        }
+      },
+      "Users_Progresses": {
+        "type": "object",
+        "required": [
+          "UserId",
+          "LessonId"
+        ],
+        "properties": {
+          "UserId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Users"
+          },
+          "LessonId": {
+            "type": "integer",
+            "$ref": "#/components/schemas/Lessons"
+          }
+        }
+      }
+    },
     "examples": {},
     "parameters": {},
-    "responses": {},
-    "requestBodies": {}
+    "requestBodies": {},
+    "responses": {}
   },
-  "tags": [],
-  "paths": {}
+  "paths": {
+    "/api/security": {
+      "get": {
+        "description": "Returns all security questions from the system that the user has access to.",
+        "operationId": "getQuestions",
+        "tags": [
+          "Security Questions",
+          "Public Routes"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of security answers.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../swagger.json#/components/schemas/SecurityQuestions"
+                },
+                "examples": {
+                  "List": {
+                    "value": {
+                      "questions": [
+                        {
+                          "id": 1,
+                          "question": "What city were you born in?"
+                        },
+                        {
+                          "id": 2,
+                          "question": "What is your oldest sibling’s middle name?"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

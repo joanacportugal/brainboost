@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const config = require("../config/config");
+const config = require("../config");
 
 exports.verifyToken = (req, res, next) => {
 	const header = req.headers["x-access-token"] || req.headers.authorization;
 	if (typeof header == "undefined") {
-		return res.status(401).json({ success: false, msg: "No token provided!" });
+		return res.status(401).json({ error: "No token provided!" });
 	}
 	const bearer = header.split(" "); // Authorization: Bearer <token>
 	const token = bearer[1];
@@ -14,6 +14,6 @@ exports.verifyToken = (req, res, next) => {
 		req.typeUser = decoded.typeUser;
 		next();
 	} catch (err) {
-		return res.status(401).json({ success: false, msg: "Unauthorized!" });
+		return res.status(401).json({ error: "Unauthorized!" });
 	}
 };
